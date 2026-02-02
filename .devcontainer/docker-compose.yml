@@ -4,7 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile.devmachine
     volumes:
-      - ../..:/xyz:cached
+      - ../:/xyz:cached
+    # Vigtigt for Playwright i containere:
+    cap_add:
+      - SYS_ADMIN
     command: sleep infinity
     networks:
       - internal
