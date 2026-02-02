@@ -1,0 +1,14 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.devmachine
+    volumes:
+      - ../..:/xyz:cached
+    command: sleep infinity
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

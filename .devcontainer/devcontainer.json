@@ -1,0 +1,6 @@
+{
+  "name": "C# Playwright playground - one",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/xyz"
+}
