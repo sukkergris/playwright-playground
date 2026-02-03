@@ -1,17 +1,18 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0
 
-# 1. Installer Linux dependencies til Chromium
+# 1. Installer de nødvendige værktøjer til at hente browser-deps
 RUN apt-get update && apt-get install -y \
-    libnss3 \
-    libnspr4 \
-    libgbm1 \
-    # Her bruger vi wildcard eller det specifikke nye navn til .NET 10/Ubuntu 24.04
-    libasound2t64 || libasound2 \
-    libpangocairo-1.0-0 \
-    libx11-6 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxext6 \
-    libxfixes3 \
-    libxrandr2 \
+    curl \
+    gnupg \
     && rm -rf /var/lib/apt/lists/*
+
+# 2. Installer PowerShell som et globalt dotnet tool (da apt-get ikke har det som standard)
+ENV PATH="${PATH}:/root/.dotnet/tools"
+RUN dotnet tool install --global PowerShell
+
+# 3. Installer Playwright CLI globalt
+RUN dotnet tool install --global Microsoft.Playwright.CLI
+
+# 4. Installer Chromium og de nødvendige system-afhængigheder
+# Vi bruger 'pwsh' (PowerShell Core navnet) og Playwright CLI
+# RUN playwright install --with-deps chromium
