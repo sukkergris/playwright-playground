@@ -20,4 +20,10 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 UBUNTU_CODENAME=noble
 LOGO=ubuntu-logo
-``
+```
+## Installation af Headless browser
+
+Efter containernen er startet, kan vi installere en headless browser:
+`playwright install --with-deps chromium`
+
+
