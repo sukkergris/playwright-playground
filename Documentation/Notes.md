@@ -2,9 +2,20 @@
 
 ## Tjeck intallation
 
+### Check .NET tools
 `dotnet tool list --global`
+
+### Check Playwright version
 `playwright --version`
+
+### Check OS information
 `cat /etc/os-release`
+
+### Verify Chromium browser installation
+`playwright install --with-deps chromium --dry-run`
+
+### Check if Chromium binary exists
+`ls -la ~/.cache/ms-playwright/chromium-*/chrome-linux/chrome 2>/dev/null || echo "Chromium not found in cache"`
 
 ```sh
 PRETTY_NAME="Ubuntu 24.04.3 LTS"
