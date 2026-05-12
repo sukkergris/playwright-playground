@@ -3,5 +3,8 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/xyz",
-  "remoteUser": "root"
+  "remoteUser": "root",
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh/config,target=/home/vscode/.ssh/config,type=bind,readonly"
+  ]
 }
