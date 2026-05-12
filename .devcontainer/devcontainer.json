@@ -4,6 +4,7 @@
   "service": "dev",
   "workspaceFolder": "/xyz",
   "remoteUser": "root",
+  "postCreateCommand": "bash .devcontainer/post-container-creation.sh",
   "mounts": [
     "source=${localEnv:HOME}/.ssh/config,target=/home/vscode/.ssh/config,type=bind,readonly"
   ]
