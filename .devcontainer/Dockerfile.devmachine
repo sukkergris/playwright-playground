@@ -3,8 +3,16 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0
 # 1. Installer de nødvendige værktøjer til at hente browser-deps
 RUN apt-get update && apt-get install -y \
     curl \
+    git \
+    stow \
+    fzf \
+    zsh \
     gnupg \
     && rm -rf /var/lib/apt/lists/*
+
+# 1b. Installer oh-my-zsh + Powerlevel10k for root, så ~/.zshrc kan source dem uden fejl
+RUN git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /root/.oh-my-zsh \
+    && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /root/.oh-my-zsh/custom/themes/powerlevel10k
 
 # 2. Installer PowerShell som et globalt dotnet tool (da apt-get ikke har det som standard)
 ENV PATH="${PATH}:/root/.dotnet/tools"
