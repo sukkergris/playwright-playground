@@ -12,7 +12,13 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "Anthropic.claude-code"
+        "Anthropic.claude-code",
+        "google.geminicodeassist",
+        "usernamehw.errorlens",
+        "humao.rest-client",
+        "timonwong.shellcheck",
+        "mads-hartmann.bash-ide-vscode",
+        "rogalmic.bash-debug"
       ]
     }
   }
