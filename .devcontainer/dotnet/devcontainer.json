@@ -22,7 +22,8 @@
         "mads-hartmann.bash-ide-vscode",
         "rogalmic.bash-debug",
         "openai.chatgpt",
-        "ms-vscode.powershell"
+        "ms-vscode.powershell",
+        "ms-dotnettools.csdevkit"
       ]
     }
   }

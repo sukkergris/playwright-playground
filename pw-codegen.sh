@@ -25,10 +25,10 @@ if ! pgrep -f websockify > /dev/null; then
     echo "Starter noVNC på port ${NOVNC_PORT}..."
     websockify --web ${NOVNC_WEB} ${NOVNC_PORT} localhost:${VNC_PORT} &>/dev/null &
     sleep 1
-    echo ""
-    echo "Åbn i browser: http://localhost:${NOVNC_PORT}/vnc.html"
-    echo "(Forward port ${NOVNC_PORT} i VS Code hvis nødvendigt)"
-    echo ""
 fi
+
+echo ""
+echo "  Åbn browseren her: http://localhost:${NOVNC_PORT}/vnc.html"
+echo ""
 
 DISPLAY=:${DISPLAY_NUM} playwright codegen --target=csharp "$@"
