@@ -3,7 +3,7 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/xyz",
-  "remoteUser": "root",
+  "remoteUser": "root", 
   "postCreateCommand": "bash .devcontainer/post-container-creation.sh",
   "mounts": [
     "source=${localEnv:HOME}/.ssh/config,target=/root/.ssh/config,type=bind,readonly",
@@ -21,7 +21,8 @@
         "timonwong.shellcheck",
         "mads-hartmann.bash-ide-vscode",
         "rogalmic.bash-debug",
-        "openai.chatgpt"
+        "openai.chatgpt",
+        "ms-vscode.powershell"
       ]
     }
   }
