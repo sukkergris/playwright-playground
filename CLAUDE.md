@@ -25,6 +25,12 @@ To validate the full setup:
 ./validate-installation.sh
 ```
 
+## Claude In Dev Container
+
+- Claude state is stored in a named Docker volume mounted at `/root/.claude`.
+- This avoids host-path mismatches from binding host-level `.claude.json` into the container.
+- Result: you usually log in once per workspace volume, and the login persists across container rebuilds.
+
 ## Commands
 
 Build the solution:
