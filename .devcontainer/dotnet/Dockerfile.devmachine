@@ -4,6 +4,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0
 RUN apt-get update && apt-get install -y \
     curl \
     git \
+    openssh-client \
     stow \
     fzf \
     zsh \
@@ -21,6 +22,19 @@ RUN dotnet tool install --global PowerShell
 # 3. Installer Playwright CLI globalt
 RUN dotnet tool install --global Microsoft.Playwright.CLI
 
-# 4. Installer Chromium og de nødvendige system-afhængigheder
+RUN curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b /usr/local/bin
+
+# 5. Installer nvm + Node.js LTS
+# Symlinks node/npm/npx into /usr/local/bin so they work in non-interactive shells
+ENV NVM_DIR="/root/.nvm"
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash \
+    && . "$NVM_DIR/nvm.sh" \
+    && nvm install --lts \
+    && nvm alias default node \
+    && ln -sf "$(. "$NVM_DIR/nvm.sh" && which node)" /usr/local/bin/node \
+    && ln -sf "$(. "$NVM_DIR/nvm.sh" && which npm)"  /usr/local/bin/npm \
+    && ln -sf "$(. "$NVM_DIR/nvm.sh" && which npx)"  /usr/local/bin/npx
+
+# 6. Installer Chromium og de nødvendige system-afhængigheder
 # Vi bruger 'pwsh' (PowerShell Core navnet) og Playwright CLI
 # RUN playwright install --with-deps chromium

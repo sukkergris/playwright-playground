@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+tasks:
+  start:
+    desc: Start the Lit SPA dev server
+    dir: spa-lit-webcomponents
+    cmds:
+      - npm run dev -- --host 0.0.0.0

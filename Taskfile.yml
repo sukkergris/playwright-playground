@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+includes:
+  spa-lit:
+    taskfile: Taskfile.SpaLit.yml
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
