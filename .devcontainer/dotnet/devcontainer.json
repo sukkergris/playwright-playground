@@ -20,7 +20,8 @@
         "humao.rest-client",
         "timonwong.shellcheck",
         "mads-hartmann.bash-ide-vscode",
-        "rogalmic.bash-debug"
+        "rogalmic.bash-debug",
+        "openai.chatgpt"
       ]
     }
   }
