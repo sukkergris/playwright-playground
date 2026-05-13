@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y \
     fzf \
     zsh \
     gnupg \
+    xvfb \
+    x11vnc \
+    novnc \
+    websockify \
     && rm -rf /var/lib/apt/lists/*
 
 # 1b. Installer oh-my-zsh + Powerlevel10k for root, så ~/.zshrc kan source dem uden fejl
