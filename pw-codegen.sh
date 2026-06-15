@@ -31,4 +31,4 @@ echo ""
 echo "  Åbn browseren her: http://localhost:${NOVNC_PORT}/vnc.html"
 echo ""
 
-DISPLAY=:${DISPLAY_NUM} playwright codegen --target=csharp "$@"
+DISPLAY=:${DISPLAY_NUM} playwright -p /xyz/backend codegen --target=csharp "$@"

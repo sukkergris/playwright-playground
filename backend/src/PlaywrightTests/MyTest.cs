@@ -1,14 +1,14 @@
 using Microsoft.Playwright;
-using System;
-using System.Threading.Tasks;
+using Microsoft.Playwright.Xunit;
 
-using var playwright = await Playwright.CreateAsync();
-await using var browser = await playwright.Chromium.LaunchAsync(new()
+namespace PlaywrightTests;
+
+public class MyTest : PageTest
 {
-    Headless = false,
-});
-var context = await browser.NewContextAsync();
-
-var page = await context.NewPageAsync();
-await page.GotoAsync("http://localhost:5173/");
-await page.GetByRole(AriaRole.Link, new() { Name = "Home" }).ClickAsync();
+    [Fact]
+    public async Task HomeLinkNavigates()
+    {
+        await Page.GotoAsync("http://localhost:5173/");
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Home" }).ClickAsync();
+    }
+}
