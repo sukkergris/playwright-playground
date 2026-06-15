@@ -1,5 +1,19 @@
 {
     "chat.tools.terminal.autoApprove": {
         "playwright": true
-    }
+    },
+    "cSpell.words": [
+        "claude",
+        "csdevkit",
+        "dotnettools",
+        "errorlens",
+        "geminicodeassist",
+        "hartmann",
+        "humao",
+        "openai",
+        "rogalmic",
+        "shellcheck",
+        "timonwong",
+        "usernamehw"
+    ]
 }
