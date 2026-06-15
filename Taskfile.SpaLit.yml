@@ -13,4 +13,4 @@ tasks:
     desc: "Start Playwright codegen mod Lit SPA. Eks: task spa-lit:codegen -- MyTest.cs"
     dir: "{{.ROOT_DIR}}"
     cmds:
-      - ./pw-codegen.sh {{if .CLI_ARGS}}--output={{.CLI_ARGS}}{{end}} http://localhost:5173
+      - ./pw-codegen.sh {{if .CLI_ARGS}}--output=backend/src/PlaywrightTests/{{.CLI_ARGS}}{{end}} http://localhost:5173
