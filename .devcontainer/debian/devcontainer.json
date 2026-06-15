@@ -1,5 +1,5 @@
 {
-  "name": "C# Playwright playground - ms-dotnet",
+  "name": "C# Playwright playground - Debian",
   "dockerComposeFile": "docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/xyz",

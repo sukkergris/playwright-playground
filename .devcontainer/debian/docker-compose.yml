@@ -1,9 +1,9 @@
-name: playwright-playground
+name: playwright-playground-debian
 services:
   dev:
     build:
       context: .
-      dockerfile: Dockerfile.devmachine
+      dockerfile: Dockerfile.debian
     volumes:
       - ../..:/xyz:cached
     # Vigtigt for Playwright i containere:
