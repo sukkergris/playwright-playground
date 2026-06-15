@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="PlaywrightPrerender/PlaywrightPrerender.csproj" />
-  <Project Path="PlaywrightTests/PlaywrightTests.csproj" />
-</Solution>
