@@ -2,20 +2,9 @@ FROM miracle-docker-intern.jfrog.io/docker-intern/devcontainer.debian.iknowagent
 
 USER root
 
-ENV PATH="${PATH}:/root/.dotnet/tools"
-RUN dotnet tool install --global PowerShell
-
 # 3. Installer Playwright CLI globalt
-RUN dotnet tool install --global Microsoft.Playwright.CLI
+RUN dotnet tool install --tool-path /usr/local/bin Microsoft.Playwright.CLI
 
 RUN curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b /usr/local/bin
 
 
-ENV NVM_DIR="/root/.nvm"
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash \
-    && . "$NVM_DIR/nvm.sh" \
-    && nvm install --lts \
-    && nvm alias default node \
-    && ln -sf "$(. "$NVM_DIR/nvm.sh" && which node)" /usr/local/bin/node \
-    && ln -sf "$(. "$NVM_DIR/nvm.sh" && which npm)"  /usr/local/bin/npm \
-    && ln -sf "$(. "$NVM_DIR/nvm.sh" && which npx)"  /usr/local/bin/npx

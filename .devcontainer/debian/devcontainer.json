@@ -3,7 +3,7 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/xyz",
-  "remoteUser": "root",
+  "remoteUser": "container-user",
   "postCreateCommand": "bash .devcontainer/post-container-creation.sh",
   "mounts": [
     "source=claude-${localWorkspaceFolderBasename},target=/root/.claude,type=volume",
