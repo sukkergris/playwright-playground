@@ -8,11 +8,17 @@
   "mounts": [
     "source=claude-${localWorkspaceFolderBasename},target=/root/.claude,type=volume",
     "source=codex-${localWorkspaceFolderBasename},target=/root/.codex,type=volume",
-    "source=gemini-${localWorkspaceFolderBasename},target=/root/.gemini,type=volume"
+    "source=gemini-${localWorkspaceFolderBasename},target=/root/.gemini,type=volume",
+    "source=vscode-secrets-${localWorkspaceFolderBasename},target=/root/.vscode-server/data/Machine,type=volume",
+    "source=config-${localWorkspaceFolderBasename},target=/root/.config,type=volume"
   ],
+  "containerEnv": {
+    "OLLAMA_HOST": "http://host.docker.internal:11434"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
+        "Continue.continue",
         "Anthropic.claude-code",
         "google.geminicodeassist",
         "usernamehw.errorlens",
@@ -22,7 +28,8 @@
         "rogalmic.bash-debug",
         "openai.chatgpt",
         "ms-vscode.powershell",
-        "ms-dotnettools.csdevkit"
+        "ms-dotnettools.csdevkit",
+        "saoudrizwan.claude-dev"
       ]
     }
   }

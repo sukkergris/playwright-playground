@@ -1,0 +1,62 @@
+{
+  "$schema": "https://raw.githubusercontent.com/continuedev/continue/main/config-schema.json",
+  "models": [
+    {
+      "title": "Ollama - qwen2.5-coder:7b",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "apiBase": "http://host.docker.internal:11434"
+    },
+    {
+      "title": "Ollama - deepseek-r1:8b",
+      "provider": "ollama",
+      "model": "deepseek-r1:8b",
+      "apiBase": "http://host.docker.internal:11434"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Ollama - qwen2.5-coder:7b",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:7b",
+    "apiBase": "http://host.docker.internal:11434"
+  },
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text",
+    "apiBase": "http://host.docker.internal:11434"
+  },
+  "contextProviders": [
+    {
+      "name": "code"
+    },
+    {
+      "name": "docs"
+    },
+    {
+      "name": "diff"
+    },
+    {
+      "name": "terminal"
+    },
+    {
+      "name": "problems"
+    },
+    {
+      "name": "folder"
+    }
+  ],
+  "slashCommands": [
+    {
+      "name": "edit",
+      "description": "Edit selected code"
+    },
+    {
+      "name": "comment",
+      "description": "Write comments for selected code"
+    },
+    {
+      "name": "share",
+      "description": "Export current chat session to markdown"
+    }
+  ]
+}
