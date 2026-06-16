@@ -1,21 +1,25 @@
 :root {
-  color-scheme: light dark;
-  background-color: #ffffff;
+  --st-green: #00b140;
+  --st-green-dark: #009a38;
+  --st-yellow: #f7c72d;
+  --st-text: #1a1a2e;
+  --st-muted: #5a5a72;
+  --st-white: #ffffff;
+  --st-bg-light: #f7f7fa;
+  --st-border: #e0e0e8;
+  --st-font: system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    background-color: #16171d;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: var(--st-font);
+  color: var(--st-text);
+  background: var(--st-white);
   min-width: 320px;
-  min-height: 100svh;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
