@@ -10,7 +10,8 @@
     "source=codex-${localWorkspaceFolderBasename},target=/root/.codex,type=volume",
     "source=gemini-${localWorkspaceFolderBasename},target=/root/.gemini,type=volume",
     "source=vscode-secrets-${localWorkspaceFolderBasename},target=/root/.vscode-server/data/Machine,type=volume",
-    "source=config-${localWorkspaceFolderBasename},target=/root/.config,type=volume"
+    "source=config-${localWorkspaceFolderBasename},target=/root/.config,type=volume",
+    "source=continue-${localWorkspaceFolderBasename},target=/root/.continue,type=volume"
   ],
   "containerEnv": {
     "OLLAMA_HOST": "http://host.docker.internal:11434"
