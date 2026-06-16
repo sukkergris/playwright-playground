@@ -10,6 +10,9 @@
     "source=codex-${localWorkspaceFolderBasename},target=/root/.codex,type=volume",
     "source=gemini-${localWorkspaceFolderBasename},target=/root/.gemini,type=volume"
   ],
+  "containerEnv": {
+      "OLLAMA_HOST": "http://172.18.0.1:11434"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
