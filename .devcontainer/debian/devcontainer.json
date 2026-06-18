@@ -9,7 +9,6 @@
     "source=claude-${localWorkspaceFolderBasename},target=/home/container-user/.claude,type=volume",
     "source=codex-${localWorkspaceFolderBasename},target=/home/container-user/.codex,type=volume",
     "source=gemini-${localWorkspaceFolderBasename},target=/home/container-user/.gemini,type=volume",
-"source=config-${localWorkspaceFolderBasename},target=/home/container-user/.config,type=volume",
     "source=continue-${localWorkspaceFolderBasename},target=/home/container-user/.continue,type=volume"
   ],
   "containerEnv": {
@@ -30,7 +29,8 @@
         "ms-vscode.powershell",
         "ms-dotnettools.csdevkit",
         "saoudrizwan.claude-dev",
-        "ms-playwright.playwright"
+        "ms-playwright.playwright",
+        "task.vscode-task"
       ]
     }
   }

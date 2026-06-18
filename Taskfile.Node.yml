@@ -1,0 +1,39 @@
+version: '3'
+
+tasks:
+  npm:prefix:
+    desc: Show npm global prefix
+    cmds:
+      - ./scripts/npm-setup.sh prefix
+
+  npm:root:
+    desc: Show global node_modules path
+    cmds:
+      - ./scripts/npm-setup.sh root
+
+  npm:bin:
+    desc: Show global bin path
+    cmds:
+      - ./scripts/npm-setup.sh bin
+
+  npm:test-cli:
+    desc: Test if a global CLI tool works
+    vars:
+      TOOL: '{{.TOOL | default "eslint"}}'
+    cmds:
+      - ./scripts/npm-setup.sh test-cli "{{.TOOL}}"
+
+  npm:test-path:
+    desc: Check if nvm bin is in PATH
+    cmds:
+      - ./scripts/npm-setup.sh test-path
+
+  npm:test-nvm:
+    desc: Verify nvm + node + npm versions
+    cmds:
+      - ./scripts/npm-setup.sh test-nvm
+
+  npm:env-check:
+    desc: Run all npm/node environment diagnostics
+    cmds:
+      - ./scripts/npm-setup.sh env-check

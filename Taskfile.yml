@@ -5,6 +5,8 @@ version: '3'
 includes:
   spa-lit:
     taskfile: Taskfile.SpaLit.yml
+  node-stup:
+    taskfile: Taskfile.Node.yml
 
 tasks:
   default:
