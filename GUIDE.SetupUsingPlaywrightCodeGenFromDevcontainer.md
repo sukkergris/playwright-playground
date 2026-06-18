@@ -47,17 +47,19 @@ I en ny terminal i containeren:
 Output:
 ```
 Starter Xvfb på display :99...
+Xlib:  extension "DPMS" missing on display ":99".   ← harmløs advarsel
 Starter x11vnc...
 Starter noVNC på port 6080...
 
-Åbn i browser: http://localhost:6080/vnc.html
+noVNC i containeren kører på port 6080
+Åbn i host-browser: http://localhost:6081/vnc.html   ← (eller HOST_NOVNC_PORT fra .env)
 ```
 
 ### 3. Åbn live-visningen
 
-Gå til **http://localhost:6080/vnc.html** og klik **Connect**.
+Gå til **http://localhost:6081/vnc.html** (eller HOST_NOVNC_PORT fra `.devcontainer/debian/.env`) og klik **Connect**.
 
-Du ser nu Chromium-browseren live i din Mac-browser.
+Du ser nu Chromium-browseren live i din host-browser.
 
 ### 4. Generer kode
 
@@ -92,3 +94,6 @@ pkill -f websockify; pkill x11vnc; pkill Xvfb
 
 **Siden er sort i Chromium**  
 Vite-appen kører ikke. Start `npm run dev -- --host` i `spa-lit-webcomponents`.
+
+**`Xlib: extension "DPMS" missing on display ":99"`**  
+Denne advarsel er harmløs. DPMS (Display Power Management) er en X11-funktion der ikke er relevant i virtuelle Xvfb-displays. Den påvirker ikke Playwright eller codegen-flowet.

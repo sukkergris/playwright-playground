@@ -10,7 +10,7 @@ services:
     cap_add:
       - SYS_ADMIN
     ports:
-      - "6081:6080"
+      - "${HOST_NOVNC_PORT:-6080}:6080"
     command: sleep infinity
     networks:
       - internal

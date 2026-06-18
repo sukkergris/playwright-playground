@@ -139,6 +139,21 @@ ports:
 
 noVNC is then accessed at `http://localhost:6081/vnc.html`.
 
+### X11 warnings during Xvfb startup
+
+When running `pw-codegen.sh`, you may see warnings like:
+
+```
+_XSERVTransmkdir: ERROR: euid != 0, directory /tmp/.X11-unix will not be created.
+Xlib: extension "DPMS" missing on display ":99".
+```
+
+These are harmless:
+- **euid error:** normal in non-root container context; doesn't affect Xvfb or Playwright.
+- **DPMS missing:** DPMS (Display Power Management Signaling) is an X11 power feature that has no meaning in virtual displays. It does not impact Chromium, VNC, or codegen.
+
+Both messages can be safely ignored.
+
 ### Key files
 
 | File | Purpose |

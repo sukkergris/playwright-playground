@@ -1,4 +1,9 @@
 #!/bin/bash
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(cd -- "$script_dir/../.." && pwd)"
+playwright_project="$repo_root/backend/src/PlaywrightTests/PlaywrightTests.csproj"
 
 echo "=== Validating Installation ==="
 echo
@@ -16,14 +21,19 @@ else
 fi
 echo
 
-echo "3. Checking OS release:"
+echo "3. Checking Playwright CLI version:"
+playwright -p "$playwright_project" --version
+echo
+
+echo "4. Checking OS release:"
 cat /etc/os-release | grep -E "PRETTY_NAME|VERSION_ID"
 echo
 
-echo "4. Checking Chromium binary cache:"
+echo "5. Checking Chromium binary cache:"
 if ls ~/.cache/ms-playwright/chromium-*/chrome-linux/chrome &>/dev/null; then
     echo "✓ Chromium binary found"
     ls -lh ~/.cache/ms-playwright/chromium-*/chrome-linux/chrome
 else
-    echo "⚠ Chromium binary not found in cache yet"
+    echo "✗ Chromium binary not found in cache"
+    exit 1
 fi

@@ -56,5 +56,6 @@ playwright screenshot https://example.com screenshot.png
 ## Architecture Notes
 
 - Tests in `PlaywrightTests` inherit from Playwright's xUnit base classes (via `Microsoft.Playwright.Xunit`), which handles browser lifecycle automatically.
-- Playwright's global CLI tool (`Microsoft.Playwright.CLI`) is installed in the container and available as `playwright` on the PATH (`/root/.dotnet/tools`).
+- Playwright's global CLI tool (`Microsoft.Playwright.CLI`) is installed in the container and available as `playwright` on the PATH (`/usr/local/bin`).
+- Playwright MCP (`@playwright/mcp`) is installed globally with npm, allowing AI assistants to control Playwright through the Model Context Protocol.
 - The Dev Container's `docker-compose.yml` mounts the parent directory (`../`) as `/xyz`, so all sibling projects under `playwright/` are accessible inside the container.

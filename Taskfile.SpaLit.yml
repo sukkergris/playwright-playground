@@ -10,7 +10,7 @@ tasks:
       - npm run dev -- --host 0.0.0.0
 
   codegen:
-    desc: "Start Playwright codegen mod Lit SPA. Eks: task spa-lit:codegen -- MyTest.cs"
+    desc: "Start Playwright codegen mod Lit SPA (åbn http://localhost:${HOST_NOVNC_PORT}/vnc.html, fallback 6080). Eks: task spa-lit:codegen -- MyTest.cs"
     dir: "{{.ROOT_DIR}}"
     cmds:
       - ./pw-codegen.sh {{if .CLI_ARGS}}--output=backend/src/PlaywrightTests/{{.CLI_ARGS}}{{end}} http://localhost:5173
