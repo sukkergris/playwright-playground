@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "node",
+      "args": ["/home/container-user/.nvm/versions/node/v24.11.1/lib/node_modules/@playwright/mcp/cli.js", "--browser", "chromium"]
+    }
+  }
+}

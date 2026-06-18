@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Fix permissions on mounted volumes
+sudo chown -R container-user:container-user /home/container-user/.claude \
+                                             /home/container-user/.codex \
+                                             /home/container-user/.gemini \
+                                             /home/container-user/.continue 2>/dev/null || true
+
 if ! command -v playwright >/dev/null 2>&1; then
 	echo "Playwright CLI not found on PATH"
 	exit 1
