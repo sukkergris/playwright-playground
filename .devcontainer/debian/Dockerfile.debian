@@ -2,9 +2,15 @@ FROM miracle-docker-intern.jfrog.io/docker-intern/devcontainer.debian.iknowagent
 
 USER root
 
+RUN apt-get update && \
+    apt-get install -y iproute2
+
+
 # 3. Installer Playwright CLI globalt
 RUN dotnet tool install --tool-path /usr/local/bin Microsoft.Playwright.CLI
 
 RUN curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b /usr/local/bin
 
+RUN chown -R container-user:container-user /home/container-user
 
+USER container-user

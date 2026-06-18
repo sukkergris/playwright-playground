@@ -9,8 +9,7 @@
     "source=claude-${localWorkspaceFolderBasename},target=/home/container-user/.claude,type=volume",
     "source=codex-${localWorkspaceFolderBasename},target=/home/container-user/.codex,type=volume",
     "source=gemini-${localWorkspaceFolderBasename},target=/home/container-user/.gemini,type=volume",
-    "source=vscode-secrets-${localWorkspaceFolderBasename},target=/home/container-user/.vscode-server/data/Machine,type=volume",
-    "source=config-${localWorkspaceFolderBasename},target=/home/container-user/.config,type=volume",
+"source=config-${localWorkspaceFolderBasename},target=/home/container-user/.config,type=volume",
     "source=continue-${localWorkspaceFolderBasename},target=/home/container-user/.continue,type=volume"
   ],
   "containerEnv": {
@@ -30,7 +29,8 @@
         "openai.chatgpt",
         "ms-vscode.powershell",
         "ms-dotnettools.csdevkit",
-        "saoudrizwan.claude-dev"
+        "saoudrizwan.claude-dev",
+        "ms-playwright.playwright"
       ]
     }
   }

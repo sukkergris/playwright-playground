@@ -1,0 +1,12 @@
+### List models
+GET http://host.docker.internal:11434/api/tags
+Accept: application/json
+
+### Generate simple text
+POST http://host.docker.internal:11434/api/generate
+Content-Type: application/json
+
+{
+  "model": "qwen3.5:9b",
+  "prompt": "Hello from VS Code REST Client"
+}
