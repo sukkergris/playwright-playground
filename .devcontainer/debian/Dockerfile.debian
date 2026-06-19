@@ -14,11 +14,4 @@ USER container-user
 RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g @playwright/mcp@latest
 
-# Fix permissions for mounted volumes (created as root by Docker)
-USER root
-RUN chown -R container-user:container-user /home/container-user/.claude \
-                                            /home/container-user/.codex \
-                                            /home/container-user/.gemini \
-                                            /home/container-user/.continue 2>/dev/null || true
-
 USER container-user
