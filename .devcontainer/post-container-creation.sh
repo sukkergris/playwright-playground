@@ -20,5 +20,7 @@ root_dir="$(cd -- "$script_dir/.." && pwd)"
 
 playwright -p "$root_dir/backend/src/PlaywrightTests/PlaywrightTests.csproj" install --with-deps chromium
 
+npx @playwright/mcp install-browser chrome-for-testing
+
 # Validate the installation
 .devcontainer/validate-installation.sh

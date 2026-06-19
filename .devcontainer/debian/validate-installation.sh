@@ -37,3 +37,5 @@ else
     echo "✗ Chromium binary not found in cache"
     exit 1
 fi
+
+echo
