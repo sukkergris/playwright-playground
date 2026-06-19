@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Fix permissions on mounted volumes
+# Fix permissions on mounted volumes since they are owned by root when created by the container, but we want them to be owned by the container user.
 sudo chown -R container-user:container-user /home/container-user/.claude \
                                              /home/container-user/.codex \
                                              /home/container-user/.gemini \
@@ -21,6 +21,8 @@ root_dir="$(cd -- "$script_dir/.." && pwd)"
 playwright -p "$root_dir/backend/src/PlaywrightTests/PlaywrightTests.csproj" install --with-deps chromium
 
 npx @playwright/mcp install-browser chrome-for-testing
+
+npm install -g @playwright/cli
 
 # Validate the installation
 .devcontainer/validate-installation.sh
