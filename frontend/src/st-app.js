@@ -6,6 +6,7 @@ import './st-stats-bar.js'
 import './st-features.js'
 import './st-about.js'
 import './st-drivers.js'
+import './st-submit-success.js'
 import { getLanguage } from './i18n.js'
 
 export class StApp extends LitElement {
@@ -32,7 +33,7 @@ export class StApp extends LitElement {
 
   handleNavigation() {
     const hash = window.location.hash.slice(1) || 'home'
-    this.page = hash
+    this.page = hash === 'submitted' ? 'submitted' : hash
     this.requestUpdate()
   }
 
@@ -49,7 +50,7 @@ export class StApp extends LitElement {
   render() {
     return html`
       <st-header></st-header>
-      ${this.page === 'about' ? html`<st-about></st-about>` : this.page === 'drivers' ? html`<st-drivers></st-drivers>` : html`
+      ${this.page === 'about' ? html`<st-about></st-about>` : this.page === 'drivers' ? html`<st-drivers></st-drivers>` : this.page === 'submitted' ? html`<st-submit-success></st-submit-success>` : html`
         <main>
           <st-hero-search></st-hero-search>
           <st-trust-bar></st-trust-bar>

@@ -415,6 +415,35 @@ export class StHeroSearch extends LitElement {
     this._to = tmp
   }
 
+  async _submitSearch() {
+    const payload = {
+      arrival: this._from,
+      destination: this._to,
+      flightArrival: this._date,
+      roundTrip: this._withReturn,
+      adults: this._adults,
+      language: this.language,
+    }
+
+    try {
+      const response = await fetch('/api/transfer-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        throw new Error(`Search request failed with status ${response.status}`)
+      }
+
+      window.location.hash = 'submitted'
+    } catch (error) {
+      console.error('Failed to submit transfer request', error)
+    }
+  }
+
   render() {
     const airports = this._filteredAirports
     const hotels = this._filteredHotels
@@ -524,9 +553,14 @@ export class StHeroSearch extends LitElement {
 
           <div class="field adults-field">
             <span class="field-icon">&#128100;</span>
-            <select class="adults-select" aria-label="${t('home.passengers')}">
+            <select
+              class="adults-select"
+              aria-label="${t('home.passengers')}"
+              .value=${String(this._adults)}
+              @change=${e => this._adults = Number(e.target.value)}
+            >
               <option value="1">1 adult</option>
-              <option value="2" selected>2 adults</option>
+              <option value="2">2 adults</option>
               <option value="3">3 adults</option>
               <option value="4">4 adults</option>
               <option value="5">5+ adults</option>
@@ -534,7 +568,7 @@ export class StHeroSearch extends LitElement {
             <span>&#9662;</span>
           </div>
 
-          <button class="btn-search" type="button">${t('home.search')}</button>
+          <button class="btn-search" type="button" @click=${() => this._submitSearch()}>${t('home.search')}</button>
         </div>
       </div>
     `

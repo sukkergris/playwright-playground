@@ -82,6 +82,12 @@ const translations = {
       responsive: 'Responsive Support',
       responsiveDesc: '24/7 customer support team ready to assist with any requests or concerns during your transfer.',
       bookToday: 'Book with Our Drivers Today'
+    },
+    submitSuccess: {
+      title: 'Request sent successfully',
+      description: 'Thanks! We have received your transfer request and will contact you shortly to confirm details.',
+      bookAnother: 'Book another transfer',
+      viewDrivers: 'View drivers'
     }
   },
   ar: {
@@ -166,6 +172,12 @@ const translations = {
       responsive: 'دعم استجابي',
       responsiveDesc: 'فريق دعم العملاء 24/7 جاهز لمساعدتك في أي طلبات أو مخاوف أثناء تحويلك.',
       bookToday: 'احجز مع سائقينا اليوم'
+    },
+    submitSuccess: {
+      title: 'تم إرسال الطلب بنجاح',
+      description: 'شكرا لك! لقد استلمنا طلب التحويل الخاص بك وسنتواصل معك قريبا لتأكيد التفاصيل.',
+      bookAnother: 'احجز تحويلا آخر',
+      viewDrivers: 'عرض السائقين'
     }
   }
 }
