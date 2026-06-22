@@ -6,28 +6,38 @@ import './st-stats-bar.js'
 import './st-features.js'
 import './st-about.js'
 import './st-drivers.js'
+import { getLanguage } from './i18n.js'
 
 export class StApp extends LitElement {
   constructor() {
     super()
     this.page = 'home'
+    this.language = getLanguage()
     this.handleNavigation = this.handleNavigation.bind(this)
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
   }
 
   connectedCallback() {
     super.connectedCallback()
     window.addEventListener('hashchange', this.handleNavigation)
+    window.addEventListener('language-changed', this.handleLanguageChange)
     this.handleNavigation()
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
     window.removeEventListener('hashchange', this.handleNavigation)
+    window.removeEventListener('language-changed', this.handleLanguageChange)
   }
 
   handleNavigation() {
     const hash = window.location.hash.slice(1) || 'home'
     this.page = hash
+    this.requestUpdate()
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language
     this.requestUpdate()
   }
 

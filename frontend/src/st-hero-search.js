@@ -1,4 +1,5 @@
 import { LitElement, css, html } from 'lit'
+import { t, getLanguage } from './i18n.js'
 
 const AIRPORTS = [
   { code: 'CAI', name: 'Cairo International Airport', city: 'Cairo' },
@@ -36,6 +37,7 @@ export class StHeroSearch extends LitElement {
     _fromSelected: { state: true },
     _toOpen: { state: true },
     _withReturn: { state: true },
+    language: { state: true },
   }
 
   constructor() {
@@ -48,6 +50,23 @@ export class StHeroSearch extends LitElement {
     this._fromSelected = false
     this._toOpen = false
     this._withReturn = false
+    this.language = getLanguage()
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language
+    this.requestUpdate()
   }
 
   get _filteredAirports() {
@@ -402,8 +421,8 @@ export class StHeroSearch extends LitElement {
     return html`
       <div class="hero-bg"></div>
       <div class="content">
-        <h1>Taxi transfers across Egypt</h1>
-        <p class="subtitle">Private transfers from all major Egyptian airports — Cairo, Hurghada, Sharm el-Sheikh, Luxor and more</p>
+        <h1>${t('home.title')}</h1>
+        <p class="subtitle">${t('home.subtitle')}</p>
 
         <div class="search-box" role="search">
 
@@ -411,12 +430,12 @@ export class StHeroSearch extends LitElement {
             <span class="field-icon">&#9992;</span>
             <input
               type="text"
-              placeholder="Arrival airport"
+              placeholder="${t('home.arrivalAirport')}"
               .value=${this._from}
               @input=${e => { this._from = e.target.value; this._fromSelected = false; this._fromOpen = true }}
               @focus=${() => this._fromOpen = true}
               @blur=${() => setTimeout(() => this._fromOpen = false, 150)}
-              aria-label="Arrival airport"
+              aria-label="${t('home.arrivalAirport')}"
               aria-autocomplete="list"
               autocomplete="off"
             />
@@ -445,12 +464,12 @@ export class StHeroSearch extends LitElement {
             <span class="field-icon">&#128205;</span>
             <input
               type="text"
-              placeholder="Going to (hotel, address)"
+              placeholder="${t('home.destinationPlaceholder')}"
               .value=${this._to}
               @input=${e => { this._to = e.target.value; this._toOpen = true }}
               @focus=${() => this._toOpen = true}
               @blur=${() => setTimeout(() => this._toOpen = false, 150)}
-              aria-label="Destination"
+              aria-label="${t('home.destination')}"
               aria-autocomplete="list"
               autocomplete="off"
             />
@@ -476,21 +495,21 @@ export class StHeroSearch extends LitElement {
           <div class="field date-field">
             <span class="field-icon">&#128197;</span>
             <div>
-              <span class="date-label">Flight arrival</span>
+              <span class="date-label">${t('home.flightArrival')}</span>
               <span class="date-value">${this._date}</span>
             </div>
           </div>
 
           <div class="field return-field">
             <span class="field-icon">&#128197;</span>
-            <div class="trip-toggle" role="group" aria-label="Trip type">
+            <div class="trip-toggle" role="group" aria-label="${t('home.tripType')}">
               <button
                 class="trip-btn ${this._withReturn ? '' : 'active'}"
                 type="button"
                 @click=${() => this._withReturn = false}
                 aria-pressed=${this._withReturn ? 'false' : 'true'}
               >
-                One way
+                ${t('home.oneWay')}
               </button>
               <button
                 class="trip-btn ${this._withReturn ? 'active' : ''}"
@@ -498,14 +517,14 @@ export class StHeroSearch extends LitElement {
                 @click=${() => this._withReturn = true}
                 aria-pressed=${this._withReturn ? 'true' : 'false'}
               >
-                Round trip
+                ${t('home.roundTrip')}
               </button>
             </div>
           </div>
 
           <div class="field adults-field">
             <span class="field-icon">&#128100;</span>
-            <select class="adults-select" aria-label="Number of adults">
+            <select class="adults-select" aria-label="${t('home.passengers')}">
               <option value="1">1 adult</option>
               <option value="2" selected>2 adults</option>
               <option value="3">3 adults</option>
@@ -515,7 +534,7 @@ export class StHeroSearch extends LitElement {
             <span>&#9662;</span>
           </div>
 
-          <button class="btn-search" type="button">Search</button>
+          <button class="btn-search" type="button">${t('home.search')}</button>
         </div>
       </div>
     `

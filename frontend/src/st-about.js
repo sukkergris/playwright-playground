@@ -1,6 +1,28 @@
 import { LitElement, css, html } from 'lit'
+import { t, getLanguage } from './i18n.js'
 
 export class StAbout extends LitElement {
+  constructor() {
+    super()
+    this.language = getLanguage()
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language
+    this.requestUpdate()
+  }
+
   static styles = css`
     :host {
       display: block;
@@ -38,6 +60,7 @@ export class StAbout extends LitElement {
       border-radius: 8px;
       background: #fafafa;
       transition: all 0.3s;
+      text-align: center;
     }
 
     .about-card:hover {
@@ -94,58 +117,58 @@ export class StAbout extends LitElement {
   render() {
     return html`
       <main class="about-container">
-        <h1>About Habibi VIP Taxi</h1>
-        <p class="tagline">Your trusted partner for reliable, affordable airport transfers worldwide</p>
+        <h1>${t('about.title')}</h1>
+        <p class="tagline">${t('about.tagline')}</p>
 
         <div class="about-grid">
           <div class="about-card">
             <div class="icon">🌍</div>
-            <h3>Global Coverage</h3>
-            <p>Operating in major cities across the globe, we bring you reliable airport transfers wherever you travel.</p>
+            <h3>${t('about.globalCoverage')}</h3>
+            <p>${t('about.globalCoverageDesc')}</p>
           </div>
 
           <div class="about-card">
             <div class="icon">💰</div>
-            <h3>Transparent Pricing</h3>
-            <p>No hidden fees. What you see is what you pay. Fair prices guaranteed for all routes and destinations.</p>
+            <h3>${t('about.transparentPricing')}</h3>
+            <p>${t('about.transparentPricingDesc')}</p>
           </div>
 
           <div class="about-card">
             <div class="icon">⭐</div>
-            <h3>Professional Drivers</h3>
-            <p>Vetted and experienced drivers committed to delivering excellent service every single time.</p>
+            <h3>${t('about.professionalDrivers')}</h3>
+            <p>${t('about.professionalDriversDesc')}</p>
           </div>
 
           <div class="about-card">
             <div class="icon">🚗</div>
-            <h3>Modern Fleet</h3>
-            <p>Well-maintained vehicles with comfort features to ensure your ride is smooth and enjoyable.</p>
+            <h3>${t('about.modernFleet')}</h3>
+            <p>${t('about.modernFleetDesc')}</p>
           </div>
 
           <div class="about-card">
             <div class="icon">📱</div>
-            <h3>Easy Booking</h3>
-            <p>Book in seconds with our simple app. Track your ride in real-time and manage your bookings effortlessly.</p>
+            <h3>${t('about.easyBooking')}</h3>
+            <p>${t('about.easyBookingDesc')}</p>
           </div>
 
           <div class="about-card">
             <div class="icon">🛡️</div>
-            <h3>Safe & Secure</h3>
-            <p>Your safety is our priority. All drivers are background-checked and vehicles are fully insured.</p>
+            <h3>${t('about.safeSecurity')}</h3>
+            <p>${t('about.safeSecurityDesc')}</p>
           </div>
         </div>
 
-        <h2 class="section-title">Our Mission</h2>
+        <h2 class="section-title">${t('about.mission')}</h2>
         <p class="section-content">
-          At Habibi VIP Taxi, we believe everyone deserves a reliable, affordable way to get to and from the airport. We're committed to making airport transfers hassle-free, transparent, and convenient for travelers around the world.
+          ${t('about.missionDesc')}
         </p>
 
-        <h2 class="section-title">Why Choose Us?</h2>
+        <h2 class="section-title">${t('about.whyChooseUs')}</h2>
         <p class="section-content">
-          Whether you're traveling for business or pleasure, we've got you covered. With thousands of satisfied customers and years of experience in the transportation industry, we know exactly what travelers need. Our 24/7 customer support team is always ready to help.
+          ${t('about.whyChooseUsDesc')}
         </p>
 
-        <a href="/" class="cta-button">Book Your Transfer Today</a>
+        <a href="/" class="cta-button">${t('about.bookTransfer')}</a>
       </main>
     `
   }

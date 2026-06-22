@@ -1,27 +1,49 @@
 import { LitElement, css, html } from 'lit'
+import { t, getLanguage } from './i18n.js'
 
 const FEATURES = [
   {
     img: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=400&q=80',
     alt: 'Family arriving at hotel',
-    title: 'Peace of mind',
-    desc: 'No surprises. Your price is confirmed at the time of booking, free cancellation up to 48 hours before pickup, and 24/7 support.',
+    key: 'features.peaceMind',
+    descKey: 'features.peaceMindDesc',
   },
   {
     img: 'https://images.unsplash.com/photo-1536584754829-12214d404f32?w=400&q=80',
     alt: 'Couple in airport',
-    title: 'On time, every time',
-    desc: 'We track your flight and coordinate your pickup around it. No queues, no delays, just a direct ride to your hotel door.',
+    key: 'features.onTime',
+    descKey: 'features.onTimeDesc',
   },
   {
     img: 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=400&q=80',
     alt: 'Traveller with luggage',
-    title: 'Whatever your trip needs',
-    desc: 'Child seats, group vehicles, wheelchair access. Just tell us what you need and we\'ll take care of the rest.',
+    key: 'features.forYourTrip',
+    descKey: 'features.forYourTripDesc',
   },
 ]
 
 export class StFeatures extends LitElement {
+  constructor() {
+    super()
+    this.language = getLanguage()
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language
+    this.requestUpdate()
+  }
+
   static styles = css`
     :host {
       display: block;
@@ -83,14 +105,14 @@ export class StFeatures extends LitElement {
   render() {
     return html`
       <section>
-        <h2>All set before you land</h2>
+        <h2>${t('features.title')}</h2>
         <div class="grid">
           ${FEATURES.map(f => html`
             <article>
               <img src="${f.img}" alt="${f.alt}" loading="lazy" />
               <div class="body">
-                <h3>${f.title}</h3>
-                <p>${f.desc}</p>
+                <h3>${t(f.key)}</h3>
+                <p>${t(f.descKey)}</p>
               </div>
             </article>
           `)}

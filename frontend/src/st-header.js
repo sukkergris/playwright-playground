@@ -1,6 +1,32 @@
 import { LitElement, css, html } from 'lit'
+import { t, setLanguage, getLanguage } from './i18n.js'
 
 export class StHeader extends LitElement {
+  constructor() {
+    super()
+    this.language = getLanguage()
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language
+    this.requestUpdate()
+  }
+
+  changeLanguage(lang) {
+    setLanguage(lang)
+  }
+
   static styles = css`
     :host {
       display: block;
@@ -97,9 +123,38 @@ export class StHeader extends LitElement {
       background: #1a1a2e;
       color: #fff;
     }
+
+    .lang-buttons {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid #e0e0e8;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.85rem;
+      color: #1a1a2e;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .lang-btn:hover {
+      background: #f7f7fa;
+    }
+
+    .lang-btn.active {
+      background: #c8a227;
+      color: #fff;
+      border-color: #c8a227;
+    }
   `
 
   render() {
+    const isArabic = this.language === 'ar'
     return html`
       <header>
         <a href="/" class="logo">
@@ -111,14 +166,17 @@ export class StHeader extends LitElement {
         </a>
 
         <nav>
-          <a class="nav-link" href="#about">About</a>
-          <a class="nav-link" href="#drivers">Drivers</a>
-          <a class="nav-link" href="#">Help Centre</a>
+          <a class="nav-link" href="#about">${t('header.about')}</a>
+          <a class="nav-link" href="#drivers">${t('header.drivers')}</a>
+          <a class="nav-link" href="#">${t('header.helpCentre')}</a>
           <div class="divider"></div>
-          <button class="nav-link">&#127468;&#127463; English <span class="chevron">&#9662;</span></button>
-          <button class="nav-link">&#8364; EUR <span class="chevron">&#9662;</span></button>
+          <div class="lang-buttons">
+            <button class="lang-btn ${!isArabic ? 'active' : ''}" @click=${() => this.changeLanguage('en')}>EN</button>
+            <button class="lang-btn ${isArabic ? 'active' : ''}" @click=${() => this.changeLanguage('ar')}>AR</button>
+          </div>
+          <button class="nav-link">💶 EUR <span class="chevron">&#9662;</span></button>
           <div class="divider"></div>
-          <button class="btn-booking">My booking</button>
+          <button class="btn-booking">${t('header.myBooking')}</button>
         </nav>
       </header>
     `

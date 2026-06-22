@@ -7,7 +7,7 @@
   --st-white: #ffffff;
   --st-bg-light: #f7f7fa;
   --st-border: #e0e0e8;
-  --st-font: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --st-font: system-ui, 'Segoe UI', Roboto, 'Arabic Typesetting', 'Simplified Arabic', sans-serif;
 }
 
 *, *::before, *::after {
@@ -25,4 +25,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+html[dir="rtl"] {
+  direction: rtl;
+}
+
+html[dir="ltr"] {
+  direction: ltr;
 }

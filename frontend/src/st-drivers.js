@@ -1,6 +1,28 @@
 import { LitElement, css, html } from 'lit'
+import { t, getLanguage } from './i18n.js'
 
 export class StDrivers extends LitElement {
+  constructor() {
+    super()
+    this.language = getLanguage()
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('language-changed', this.handleLanguageChange)
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language
+    this.requestUpdate()
+  }
+
   static styles = css`
     :host {
       display: block;
@@ -96,6 +118,7 @@ export class StDrivers extends LitElement {
       background: #f0f9ff;
       border-left: 4px solid #c8a227;
       border-radius: 4px;
+      text-align: left;
     }
 
     .benefit-item h4 {
@@ -130,11 +153,11 @@ export class StDrivers extends LitElement {
   render() {
     return html`
       <main class="drivers-container">
-        <h1>Meet Our Drivers</h1>
-        <p class="tagline">Professional, vetted, and dedicated to your safe and comfortable journey</p>
+        <h1>${t('drivers.title')}</h1>
+        <p class="tagline">${t('drivers.tagline')}</p>
 
         <section>
-          <h2 class="section-title">Our Team</h2>
+          <h2 class="section-title">${t('drivers.ourTeam')}</h2>
           <div class="drivers-grid">
             <div class="driver-card">
               <div class="driver-avatar">👨‍✈️</div>
@@ -180,49 +203,49 @@ export class StDrivers extends LitElement {
           </div>
         </section>
 
-        <h2 class="section-title">Why Our Drivers Stand Out</h2>
+        <h2 class="section-title">${t('drivers.standOut')}</h2>
         <p class="section-content">
-          Every driver on the Habibi VIP Taxi team undergoes rigorous vetting and continuous training to ensure they meet our high standards for professionalism, safety, and customer service.
+          ${t('drivers.standOutDesc')}
         </p>
 
         <div class="benefits-grid">
           <div class="benefit-item">
-            <h4>🎓 Trained & Certified</h4>
-            <p>All drivers complete comprehensive training programs covering safety, customer service, and local knowledge.</p>
+            <h4>🎓 ${t('drivers.trained')}</h4>
+            <p>${t('drivers.trainedDesc')}</p>
           </div>
 
           <div class="benefit-item">
-            <h4>✓ Background Checked</h4>
-            <p>Every driver undergoes thorough background verification and criminal history checks for your peace of mind.</p>
+            <h4>✓ ${t('drivers.background')}</h4>
+            <p>${t('drivers.backgroundDesc')}</p>
           </div>
 
           <div class="benefit-item">
-            <h4>🚗 Vehicle Inspected</h4>
-            <p>Regular vehicle maintenance and inspections ensure your journey is safe, comfortable, and reliable.</p>
+            <h4>🚗 ${t('drivers.vehicle')}</h4>
+            <p>${t('drivers.vehicleDesc')}</p>
           </div>
 
           <div class="benefit-item">
-            <h4>⭐ Highly Rated</h4>
-            <p>Our drivers maintain an average 4.8+ star rating across thousands of customer reviews and feedback.</p>
+            <h4>⭐ ${t('drivers.rated')}</h4>
+            <p>${t('drivers.ratedDesc')}</p>
           </div>
 
           <div class="benefit-item">
-            <h4>🌍 Multi-Lingual</h4>
-            <p>Many of our drivers speak multiple languages to serve international travelers with ease and confidence.</p>
+            <h4>🌍 ${t('drivers.multilingual')}</h4>
+            <p>${t('drivers.multilingualDesc')}</p>
           </div>
 
           <div class="benefit-item">
-            <h4>💬 Responsive Support</h4>
-            <p>24/7 customer support team ready to assist with any requests or concerns during your transfer.</p>
+            <h4>💬 ${t('drivers.responsive')}</h4>
+            <p>${t('drivers.responsiveDesc')}</p>
           </div>
         </div>
 
-        <h2 class="section-title">Want to Join Our Team?</h2>
+        <h2 class="section-title">${t('drivers.joinTeam')}</h2>
         <p class="section-content">
-          We're always looking for professional drivers who share our commitment to excellence and customer satisfaction. If you're interested in becoming part of Habibi VIP Taxi, we'd love to hear from you. Applications are evaluated based on driving record, experience, customer service skills, and local knowledge.
+          ${t('drivers.joinTeamDesc')}
         </p>
 
-        <a href="/" class="cta-button">Book with Our Drivers Today</a>
+        <a href="/" class="cta-button">${t('drivers.bookToday')}</a>
       </main>
     `
   }
