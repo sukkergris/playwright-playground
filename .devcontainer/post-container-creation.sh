@@ -22,7 +22,7 @@ playwright -p "$root_dir/backend/src/PlaywrightTests/PlaywrightTests.csproj" ins
 
 npx @playwright/mcp install-browser chrome-for-testing
 
-npm install -g @playwright/cli
+playwright-cli install --skills
 
 # Validate the installation
 .devcontainer/validate-installation.sh

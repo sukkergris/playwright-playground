@@ -290,3 +290,6 @@ elm-watch-*.js
 yarp-logfiles/
 
 .playwright-mcp/*
+
+docs/presentation/screenshots/*
+!docs/presentation/screenshots/.gitkeep
