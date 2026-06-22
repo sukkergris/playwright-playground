@@ -19,13 +19,11 @@
       "extensions": [
         "Continue.continue",
         "Anthropic.claude-code",
-        "google.geminicodeassist",
         "usernamehw.errorlens",
         "humao.rest-client",
         "timonwong.shellcheck",
         "mads-hartmann.bash-ide-vscode",
         "rogalmic.bash-debug",
-        "openai.chatgpt",
         "ms-vscode.powershell",
         "ms-dotnettools.csdevkit",
         "saoudrizwan.claude-dev",
