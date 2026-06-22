@@ -20,5 +20,7 @@ dist-ssr
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
+docs/presentation/**/*.pdf
+docs/presentation/**/*.pptx
+docs/presentation/**/*.key
