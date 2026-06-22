@@ -9,6 +9,8 @@ A .NET 10 playground for exploring Microsoft Playwright. The solution contains t
 - **PlaywrightTests** — xUnit test project using `Microsoft.Playwright.Xunit` for browser automation tests
 - **PlaywrightPrerender** — Console app scaffolded for Playwright-driven prerendering experiments
 
+This is a **.NET project**. The primary language is C#. Prefer .NET tooling (`dotnet`, the `playwright` .NET CLI) over Node.js alternatives unless explicitly instructed otherwise.
+
 ## Dev Environment
 
 The project runs inside a Dev Container (Docker Compose). The container is based on `mcr.microsoft.com/dotnet/sdk:10.0` and requires `SYS_ADMIN` capability for Playwright's headless Chromium to work. The workspace is mounted at `/xyz`.
@@ -52,6 +54,20 @@ Take a screenshot via the Playwright CLI (useful for quick browser checks):
 ```sh
 playwright screenshot https://example.com screenshot.png
 ```
+
+## Playwright MCP
+
+The Playwright MCP (`@playwright/mcp`) is installed and configured, but **disabled by default** so token consumption can be measured without it.
+
+**Without MCP** — use the .NET `playwright` CLI for browser tasks:
+```sh
+playwright screenshot https://example.com screenshot.png
+```
+
+**With MCP** — enable it in `.claude/settings.json` before the session, then instruct Claude:
+> "Use the Playwright MCP to open ... and take a screenshot."
+
+Do **not** attempt to use MCP tools if they are not available (ToolSearch returns no results for Playwright tools). Fall back to the CLI immediately.
 
 ## Architecture Notes
 
