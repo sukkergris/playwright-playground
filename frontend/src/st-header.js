@@ -111,7 +111,8 @@ export class StHeader extends LitElement {
         </a>
 
         <nav>
-          <a class="nav-link" href="#">Agencies</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#drivers">Drivers</a>
           <a class="nav-link" href="#">Help Centre</a>
           <div class="divider"></div>
           <button class="nav-link">&#127468;&#127463; English <span class="chevron">&#9662;</span></button>
