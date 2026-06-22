@@ -52,8 +52,10 @@ dotnet test --filter "FullyQualifiedName=PlaywrightTests.UnitTest1.Test1"
 
 Take a screenshot via the Playwright CLI (useful for quick browser checks):
 ```sh
-playwright screenshot https://example.com screenshot.png
+cd /xyz/backend && playwright screenshot https://example.com screenshot.png
 ```
+
+The `.NET` `playwright` CLI must be run from `/xyz/backend` (where `first-try.sln` lives) — it won't find the project from `/xyz`.
 
 ## Playwright MCP
 
@@ -61,7 +63,7 @@ The Playwright MCP (`@playwright/mcp`) is installed and configured, but **disabl
 
 **Without MCP** — use the .NET `playwright` CLI for browser tasks:
 ```sh
-playwright screenshot https://example.com screenshot.png
+cd /xyz/backend && playwright screenshot https://example.com screenshot.png
 ```
 
 **With MCP** — enable it in `.claude/settings.json` before the session, then instruct Claude:

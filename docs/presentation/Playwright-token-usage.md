@@ -1,71 +1,165 @@
-# Playwright token usage
-* playwright-cli
-* CLI vs MCP
-- Demo
+---
+marp: true
+theme: default
+paginate: true
+---
+
+# Playwright & Claude Code
+## CLI vs MCP — Token Usage
+
+---
+
+## Agenda
+
+- What is Playwright MCP?
+- Demo: CLI vs MCP
 - Token efficiency
-- Capabilities
-- Summary
-* How to chose
+- Optimize with specific prompts
+- How to choose
 
+---
 
-# Token usage
+## Setup — CLAUDE.md
 
-## Prepare
-
-Update Claude.md
-
-```Claude.md
-This is a **.NET project**. The primary language is C#. Prefer .NET tooling (`dotnet`, the `playwright` .NET CLI) over Node.js alternatives unless explicitly instructed otherwise.
+Tell Claude what kind of project this is:
 
 ```
+This is a .NET project. The primary language is C#.
+Prefer .NET tooling (dotnet, the playwright .NET CLI)
+over Node.js alternatives unless explicitly instructed otherwise.
+```
 
+> Without this, Claude may reach for Node.js tooling even in a .NET project.
 
+---
 
-## CLI
-```claude
+## Measuring Token Usage
+
+Use `/context` to inspect usage mid-session:
+
+| Category | Tokens | % |
+|---|---|---|
+| System prompt | 6.7k | 3.4% |
+| System tools | 15.2k | 7.6% |
+| Memory files | 0.8k | 0.4% |
+| Skills | 1.3k | 0.7% |
+| **Messages** | **~8** | **<0.1%** |
+| Autocompact buffer | 33.0k | 16.5% |
+
+> Use `/clear` before each demo to reset messages and the autocompact buffer.
+> This drops context from ~12% to ~2–3%, giving a clean baseline.
+
+---
+
+## Demo — CLI (no MCP)
+
+Disable the Playwright MCP, then run:
+
+```
 /mcp
 ```
-```claude
-open playwright.dev, search for locators and check that the doc is available for each language. Take screenshots of each of the language docs, using the .NET playwright CLI.
+
 ```
-View token usage
-```claude
+Open playwright.dev, search for locators and check that the doc
+is available for each language. Take screenshots of each of the
+language docs, using the .NET playwright CLI.
+```
+
+Check token usage:
+```
 /context
 ```
-Disable playwright
 
+---
 
-## MCP
-```claude
-open playwright.dev, search for locators and check that the doc is available for each language. Take screenshots of each of the language docs, use the Playwright MCP to screenshot.
+## Demo — MCP
+
+Enable the Playwright MCP, then run:
+
 ```
-View token usage
-```claude
-/conte
+Open playwright.dev, search for locators and check that the doc
+is available for each language. Take screenshots of each of the
+language docs, use the Playwright MCP to screenshot.
+```
 
-## Optimize by being specific
+Check token usage:
+```
+/context
+```
 
-The biggest token costs come from tool calls Claude needs to discover things it could have been told upfront. Here are tight prompts for each mode:
+---
 
-1. CLI (no MCP)
+## Results
 
-Take a screenshot of the Playwright locators doc for each language using the .NET playwright CLI. The four URLs are:
-- https://playwright.dev/docs/locators (nodejs)
-- https://playwright.dev/python/docs/locators (python)
-- https://playwright.dev/java/docs/locators (java)
-- https://playwright.dev/dotnet/docs/locators (dotnet)
+| | CLI | MCP |
+|---|---|---|
+| Screenshots | ✅ | ✅ |
+| Tool calls | fewer | more |
+| Token cost | lower | higher |
+| Capabilities | limited | rich |
 
-Save to docs/presentation/screenshots/locators-{language}.png. Run all four commands in parallel.
-Why it's cheap: No WebFetch to discover URLs, no exploration, parallel Bash calls = 4 tool calls total.
+---
 
-2. MCP
+## Optimize — Be Specific
 
-Use the Playwright MCP to screenshot the locators doc for each language on playwright.dev. Navigate directly to these URLs — do not search:
-- https://playwright.dev/docs/locators → docs/presentation/screenshots/locators-nodejs.png
-- https://playwright.dev/python/docs/locators → docs/presentation/screenshots/locators-python.png
-- https://playwright.dev/java/docs/locators → docs/presentation/screenshots/locators-java.png
-- https://playwright.dev/dotnet/docs/locators → docs/presentation/screenshots/locators-dotnet.png
-Why it's cheap: Pre-supplied URLs skip any goto + search interaction. One navigate + one screenshot per language = 8 MCP tool calls total.
+The biggest token cost comes from **discovery**.
 
-Key principle
-Both prompts pre-supply the URLs. The expensive part of your original prompt was the implicit instruction to search for locators — that triggered a WebFetch to discover the language URLs before any screenshots could happen.
+If Claude has to find URLs, it calls WebFetch first.
+Hand them over upfront and skip that entirely.
+
+---
+
+## Optimized CLI Prompt
+
+```
+Take a screenshot of the Playwright locators doc for each language
+using the .NET playwright CLI from /xyz/backend:
+
+- https://playwright.dev/docs/locators          → screenshots/cli/locators-nodejs.png
+- https://playwright.dev/python/docs/locators   → screenshots/cli/locators-python.png
+- https://playwright.dev/java/docs/locators     → screenshots/cli/locators-java.png
+- https://playwright.dev/dotnet/docs/locators   → screenshots/cli/locators-dotnet.png
+
+Run all four in parallel.
+```
+
+**~1 tool call** — one parallel Bash invocation, no discovery needed.
+
+---
+
+## Optimized MCP Prompt
+
+```
+Use the Playwright MCP to screenshot the locators doc for each
+language. Navigate directly — do not search:
+
+- https://playwright.dev/docs/locators          → screenshots/mcp/locators-nodejs.png
+- https://playwright.dev/python/docs/locators   → screenshots/mcp/locators-python.png
+- https://playwright.dev/java/docs/locators     → screenshots/mcp/locators-java.png
+- https://playwright.dev/dotnet/docs/locators   → screenshots/mcp/locators-dotnet.png
+```
+
+**~8 MCP tool calls** — navigate + screenshot × 4, no search step.
+
+---
+
+## Key Principle
+
+> Pre-supply what Claude would otherwise have to discover.
+
+Every tool call costs tokens. The vaguer the prompt,
+the more Claude explores before it acts.
+
+---
+
+## How to Choose
+
+| | CLI | MCP |
+|---|---|---|
+| Simple screenshots | ✅ | ✅ |
+| Click / interact | ❌ | ✅ |
+| Fill forms | ❌ | ✅ |
+| Token cost | lower | higher |
+| .NET native | ✅ | — |
+
+**Default to CLI. Reach for MCP when you need interactivity.**
