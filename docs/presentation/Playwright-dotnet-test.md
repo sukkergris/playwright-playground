@@ -47,7 +47,8 @@ Run the tests when done.
 Use this when you want to inspect the live form first.
 
 ```text
-Create backend/src/PlaywrightTests/HabibiSearchFormTestMCP.cs. Test the transfer form submit with English and Arabic tests that mock /api/transfer-request, fill the form, submit, verify #submitted redirect and the success heading.
+Create backend/src/PlaywrightTests/HabibiSearchFormTestMCP.cs. Test the transfer form submit with English and Arabic tests that mock /api/transfer-request,
+ fill the form, submit, verify #submitted redirect and the success heading.
 Run the tests when done.
 ```
 
@@ -56,7 +57,9 @@ Run the tests when done.
 ## Optimized CLI Prompt
 
 ```text
-Using dotnet and repo code patterns only, create backend/src/PlaywrightTests/HabibiSearchFormTestOptimizedCLI.cs with two PageTest tests (EN + AR) for the transfer form. Mock /api/transfer-request, assert payload values, assert redirect to #submitted, assert localized success heading, run filtered dotnet test and report results.
+Using dotnet and repo code patterns only, create backend/src/PlaywrightTests/HabibiSearchFormTestOptimizedCLI.cs
+ with two PageTest tests (EN + AR) for the transfer form. Mock /api/transfer-request, assert payload values,
+ assert redirect to #submitted, assert localized success heading, run filtered dotnet test and report results.
 ```
 
 ---
@@ -64,7 +67,9 @@ Using dotnet and repo code patterns only, create backend/src/PlaywrightTests/Hab
 ## Optimized MCP Prompt
 
 ```text
-Use Playwright MCP to inspect the form at http://localhost:5173/ if needed, then create backend/src/PlaywrightTests/HabibiSearchFormTestOptimizedMCP.cs with two PageTest tests (EN + AR) for the transfer form. Mock /api/transfer-request, assert payload values, assert redirect to #submitted, assert localized success heading, run filtered dotnet test and report results.
+Use Playwright MCP to inspect the form at http://localhost:5173/ if needed, then create backend/src/PlaywrightTests/HabibiSearchFormTestOptimizedMCP.cs
+ with two PageTest tests (EN + AR) for the transfer form. Mock /api/transfer-request,
+  assert payload values, assert redirect to #submitted, assert localized success heading, run filtered dotnet test and report results.
 ```
 
 > **Note:** Both prompts deliver identical outcomes, but they steer **different tool choices**:
