@@ -28,7 +28,8 @@
         "ms-dotnettools.csdevkit",
         "saoudrizwan.claude-dev",
         "ms-playwright.playwright",
-        "task.vscode-task"
+        "task.vscode-task",
+        "marp-team.marp-vscode"
       ]
     }
   }
