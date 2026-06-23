@@ -3,7 +3,8 @@ FROM miracle-docker-intern.jfrog.io/docker-intern/devcontainer.debian.iknowagent
 USER root
 
 RUN apt-get update && \
-    apt-get install -y iproute2
+    apt-get install -y iproute2 \
+                       iputils-ping
 
 RUN curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b /usr/local/bin
 

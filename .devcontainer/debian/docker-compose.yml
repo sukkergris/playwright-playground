@@ -9,6 +9,8 @@ services:
     # Vigtigt for Playwright i containere:
     cap_add:
       - SYS_ADMIN
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "${HOST_NOVNC_PORT:-6080}:6080"
     command: sleep infinity

@@ -124,7 +124,7 @@ No manual test writing. No browser inspector. Just a prompt.
 Claude reads the codebase and writes the test. No browser opened.
 
 ```
-Create HabibiSearchFormTest.cs with EN + AR tests.
+Create HabibiSearchFormTestCLI.cs with EN + AR tests.
 Mock /api/transfer-request, fill the form,
 assert redirect to #submitted. Run when done.
 ```
@@ -141,7 +141,7 @@ Claude opens the live app, inspects the UI, then writes the test based on what i
 
 ```
 Use Playwright MCP to inspect the form at localhost:5173,
-then create HabibiSearchFormTest.cs with EN + AR tests.
+then create HabibiSearchFormTestMCP.cs with EN + AR tests.
 Mock /api/transfer-request, assert redirect and
 success heading. Run when done.
 ```
