@@ -31,26 +31,35 @@ export class StHeroSearch extends LitElement {
   static properties = {
     _from: { state: true },
     _to: { state: true },
-    _date: { state: true },
     _adults: { state: true },
     _fromOpen: { state: true },
     _fromSelected: { state: true },
     _toOpen: { state: true },
     _withReturn: { state: true },
     language: { state: true },
+    _dateOpen: { state: true },
+    _calYear: { state: true },
+    _calMonth: { state: true },
+    _pickerDate: { state: true },
+    _pickerTime: { state: true },
   }
 
   constructor() {
     super()
     this._from = ''
     this._to = ''
-    this._date = 'Jun 19 - 12:00'
     this._adults = 2
     this._fromOpen = false
     this._fromSelected = false
     this._toOpen = false
     this._withReturn = false
     this.language = getLanguage()
+    const now = new Date()
+    this._dateOpen = false
+    this._calYear = now.getFullYear()
+    this._calMonth = now.getMonth()
+    this._pickerDate = null
+    this._pickerTime = '12:00'
     this.handleLanguageChange = this.handleLanguageChange.bind(this)
   }
 
@@ -482,6 +491,186 @@ export class StHeroSearch extends LitElement {
         border-radius: 10px;
       }
     }
+
+    /* ── Date picker ─────────────────────────────── */
+
+    .date-field {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .date-placeholder { color: #aaa; }
+
+    .date-picker {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: -3px;
+      width: 288px;
+      background: #fff;
+      border: 1px solid #e0e0e8;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      z-index: 200;
+      padding: 14px;
+      text-align: left;
+    }
+
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .cal-nav {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #555;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.1s;
+    }
+
+    .cal-nav:hover { background: #f0f0f5; }
+
+    .cal-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      margin-bottom: 12px;
+    }
+
+    .cal-day-lbl {
+      text-align: center;
+      font-size: 0.68rem;
+      color: #bbb;
+      font-weight: 600;
+      padding: 3px 0;
+    }
+
+    .cal-day {
+      background: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.8rem;
+      color: #1a1a2e;
+      padding: 5px 0;
+      text-align: center;
+      transition: background 0.1s, color 0.1s;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cal-day:hover { background: #f0f0f5; }
+
+    .cal-day.today {
+      font-weight: 700;
+      color: #0077a8;
+    }
+
+    .cal-day.sel {
+      background: #00b140;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .cal-day.sel:hover { background: #009a38; }
+
+    .time-section {
+      border-top: 1px solid #f0f0f5;
+      padding-top: 10px;
+    }
+
+    .time-label {
+      font-size: 0.7rem;
+      color: #bbb;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hour-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3px;
+      margin-bottom: 8px;
+    }
+
+    .hour-btn {
+      background: #f7f7fa;
+      border: 1px solid #e8e8f0;
+      border-radius: 5px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.74rem;
+      color: #1a1a2e;
+      padding: 5px 2px;
+      text-align: center;
+      transition: background 0.1s;
+    }
+
+    .hour-btn:hover { background: #e0e0ea; }
+
+    .hour-btn.sel {
+      background: #0077a8;
+      border-color: #0077a8;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .min-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .min-btn {
+      flex: 1;
+      background: #f7f7fa;
+      border: 1px solid #e8e8f0;
+      border-radius: 7px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      padding: 7px 0;
+      text-align: center;
+      transition: background 0.1s;
+    }
+
+    .min-btn:hover { background: #e0e0ea; }
+
+    .min-btn.sel {
+      background: #00b140;
+      border-color: #00b140;
+      color: #fff;
+    }
+
+    @media (max-width: 700px) {
+      .date-picker {
+        left: 0;
+        right: auto;
+        width: 272px;
+      }
+    }
   `
 
   _swap() {
@@ -490,11 +679,94 @@ export class StHeroSearch extends LitElement {
     this._to = tmp
   }
 
+  get _dateDisplay() {
+    if (!this._pickerDate) return null
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    const d = this._pickerDate
+    return `${MONTHS[d.getMonth()]} ${d.getDate()} · ${this._pickerTime}`
+  }
+
+  _prevMonth() {
+    if (this._calMonth === 0) { this._calMonth = 11; this._calYear-- }
+    else this._calMonth--
+  }
+
+  _nextMonth() {
+    if (this._calMonth === 11) { this._calMonth = 0; this._calYear++ }
+    else this._calMonth++
+  }
+
+  _selectDay(year, month, day) {
+    this._pickerDate = new Date(year, month, day)
+  }
+
+  _renderDatePicker() {
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    const DAY_LABELS = ['Mo','Tu','We','Th','Fr','Sa','Su']
+    const year = this._calYear
+    const month = this._calMonth
+    const firstDow = new Date(year, month, 1).getDay()
+    const startOffset = (firstDow + 6) % 7
+    const daysInMonth = new Date(year, month + 1, 0).getDate()
+    const cells = []
+    for (let i = 0; i < startOffset; i++) cells.push(null)
+    for (let d = 1; d <= daysInMonth; d++) cells.push(d)
+    const today = new Date()
+    const tY = today.getFullYear(), tM = today.getMonth(), tD = today.getDate()
+    const pd = this._pickerDate
+
+    return html`
+      <div class="date-picker" @mousedown=${e => e.preventDefault()}>
+        <div class="cal-header">
+          <button class="cal-nav" @click=${this._prevMonth}>&#8249;</button>
+          <span class="cal-title">${MONTHS[month]} ${year}</span>
+          <button class="cal-nav" @click=${this._nextMonth}>&#8250;</button>
+        </div>
+        <div class="cal-grid">
+          ${DAY_LABELS.map(l => html`<span class="cal-day-lbl">${l}</span>`)}
+          ${cells.map(d => d === null
+            ? html`<span></span>`
+            : html`<button
+                class="cal-day ${pd && pd.getFullYear()===year && pd.getMonth()===month && pd.getDate()===d ? 'sel' : ''} ${year===tY && month===tM && d===tD ? 'today' : ''}"
+                @click=${() => this._selectDay(year, month, d)}
+              >${d}</button>`
+          )}
+        </div>
+        <div class="time-section">
+          <span class="time-label">Time of arrival</span>
+          <div class="hour-grid">
+            ${Array.from({length: 24}, (_, h) => {
+              const selH = Number(this._pickerTime.split(':')[0])
+              return html`<button
+                class="hour-btn ${h === selH ? 'sel' : ''}"
+                @click=${() => this._pickerTime = `${String(h).padStart(2,'0')}:${this._pickerTime.split(':')[1]}`}
+              >${String(h).padStart(2,'0')}</button>`
+            })}
+          </div>
+          <div class="min-row">
+            ${['00','30'].map(m => {
+              const selM = this._pickerTime.split(':')[1]
+              const h = this._pickerTime.split(':')[0]
+              return html`<button
+                class="min-btn ${selM === m ? 'sel' : ''}"
+                @click=${() => {
+                  this._pickerTime = `${h}:${m}`
+                  if (!this._pickerDate) this._pickerDate = new Date()
+                  this._dateOpen = false
+                }}
+              >${m === '00' ? ':00 — on the hour' : ':30 — half past'}</button>`
+            })}
+          </div>
+        </div>
+      </div>
+    `
+  }
+
   async _submitSearch() {
     const payload = {
       arrival: this._from,
       destination: this._to,
-      flightArrival: this._date,
+      flightArrival: this._dateDisplay ?? '',
       roundTrip: this._withReturn,
       adults: this._adults,
       language: this.language,
@@ -596,12 +868,23 @@ export class StHeroSearch extends LitElement {
             ` : ''}
           </div>
 
-          <div class="field date-field">
+          <div
+            class="field date-field"
+            tabindex="0"
+            role="button"
+            aria-label="${t('home.flightArrival')}"
+            aria-expanded=${this._dateOpen}
+            @click=${() => this._dateOpen = !this._dateOpen}
+            @blur=${() => setTimeout(() => this._dateOpen = false, 150)}
+          >
             <span class="field-icon">&#128197;</span>
             <div>
               <span class="date-label">${t('home.flightArrival')}</span>
-              <span class="date-value">${this._date}</span>
+              <span class="${this._dateDisplay ? 'date-value' : 'date-placeholder'}">
+                ${this._dateDisplay ?? 'Select date & time'}
+              </span>
             </div>
+            ${this._dateOpen ? this._renderDatePicker() : ''}
           </div>
 
           <div class="field return-field">
