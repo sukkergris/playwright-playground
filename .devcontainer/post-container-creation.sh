@@ -26,3 +26,9 @@ playwright-cli install --skills
 
 # Validate the installation
 .devcontainer/validate-installation.sh
+
+SCRIPTS_DIR="/xyz/.devcontainer/scripts"
+
+"$SCRIPTS_DIR/copy-ssh-files.sh"
+"$SCRIPTS_DIR/remove-usekeychain.sh" ~/.ssh/config
+

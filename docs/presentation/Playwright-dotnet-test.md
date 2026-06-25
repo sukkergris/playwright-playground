@@ -207,3 +207,34 @@ When a translation key is broken, the app falls back to English. In an Arabic UI
 | Tests run automatically | ✓ |
 
 The only difference is how Claude gets there — and what it costs to ask.
+
+## Generate test for https://knowit.dk
+
+```prompts
+Go to https://knowit.dk and find out how to contact knowit using email. Output should test each avalable mailaddress.
+Add an new file for this test in @backend/src/PlaywrightTests/KnowitAgentic.cs
+
+
+```
+
+---
+
+<div class="eyebrow">Debugging</div>
+
+## Watch the test run<br>step by step
+
+<hr class="rule">
+
+Open noVNC in a host browser, then run the test with the Playwright Inspector:
+
+```
+# 1 — open in browser on host
+http://localhost:6080/vnc.html
+
+# 2 — run with step-through
+cd /xyz/backend
+PWDEBUG=1 dotnet test --filter "FullyQualifiedName~KnowitAgentic"
+```
+
+The Inspector appears inside noVNC. Press **Step over** (F10) to advance one action at a time. No code changes needed — `PWDEBUG=1` enables headed mode automatically.
+

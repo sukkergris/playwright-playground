@@ -3,6 +3,7 @@
         "playwright": true
     },
     "cSpell.words": [
+        "azuretools",
         "claude",
         "csdevkit",
         "debian",
@@ -15,11 +16,15 @@
         "humao",
         "iknowagentic",
         "jfrog",
+        "marp",
         "openai",
         "Prerender",
         "rogalmic",
+        "saoudrizwan",
         "shellcheck",
+        "sshtemplate",
         "timonwong",
+        "usekeychain",
         "usernamehw"
     ]
 }

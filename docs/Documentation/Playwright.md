@@ -1,5 +1,25 @@
 # Playwright
 
+## Run in headed mode with step-through (Playwright Inspector)
+
+Set `PWDEBUG=1` before running a test. Playwright will launch a visible browser and open the Inspector, which pauses before each action and lets you step through one action at a time.
+
+**View the browser** — open noVNC in a host browser before running the test:
+
+```
+http://localhost:6080/vnc.html
+```
+
+**Run a single test with the Inspector:**
+
+```sh
+cd /xyz/backend && PWDEBUG=1 dotnet test --filter "FullyQualifiedName~KnowitAgentic"
+```
+
+The Playwright Inspector window appears inside noVNC. Use the **Step over** button (or keyboard shortcut F10) to advance one action at a time.
+
+> `PWDEBUG=1` also sets `Headless=false` automatically, so no code changes are needed.
+
 ## CLI
 
 playwright screenshot https://dr.dk/ screenshot.png

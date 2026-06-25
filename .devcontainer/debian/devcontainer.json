@@ -4,13 +4,12 @@
   "service": "dev",
   "workspaceFolder": "/xyz",
   "remoteUser": "container-user",
-  "postCreateCommand": "bash .devcontainer/post-container-creation.sh",
   "mounts": [
     "source=claude-${localWorkspaceFolderBasename},target=/home/container-user/.claude,type=volume",
-    "source=codex-${localWorkspaceFolderBasename},target=/home/container-user/.codex,type=volume",
-    "source=gemini-${localWorkspaceFolderBasename},target=/home/container-user/.gemini,type=volume",
-    "source=continue-${localWorkspaceFolderBasename},target=/home/container-user/.continue,type=volume"
+    "source=continue-${localWorkspaceFolderBasename},target=/home/container-user/.continue,type=volume",
+    "source=${localEnv:HOME}/.ssh,target=/container-user/.sshtemplate,type=bind,readonly,consistency=cached"
   ],
+  "postCreateCommand": "bash .devcontainer/post-container-creation.sh",
   "containerEnv": {
       "OLLAMA_HOST": "http://host.docker.internal:11434"
   },
