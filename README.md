@@ -70,6 +70,7 @@ dotnet test --filter "FullyQualifiedName=PlaywrightTests.UnitTest1.Test1"
 If you use Chrome for quick Playwright workflows, this extension is recommended:
 
 - Playwright CRX: https://chromewebstore.google.com/detail/playwright-crx/jambeljnbnfbkcpnoiaedcabbgmnnlcd
+- WAVE Evaluation Tool: https://chromewebstore.google.com/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh
 
 Take a quick screenshot with Playwright CLI:
 
