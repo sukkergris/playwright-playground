@@ -151,6 +151,79 @@ export class StHeader extends LitElement {
       color: #fff;
       border-color: #c8a227;
     }
+
+    @media (max-width: 980px) {
+      header {
+        height: auto;
+        padding: 10px 16px;
+        flex-direction: column;
+        align-items: stretch;
+        row-gap: 10px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        white-space: normal;
+      }
+
+      .logo {
+        justify-content: center;
+      }
+
+      .divider {
+        display: none;
+      }
+
+      .nav-link,
+      .btn-booking,
+      .lang-buttons {
+        border: 1px solid #dce3ec;
+        border-radius: 999px;
+        background: #f7f9fc;
+      }
+
+      .nav-link,
+      .btn-booking {
+        padding: 6px 12px;
+      }
+
+      .lang-buttons {
+        padding: 2px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .logo {
+        font-size: 0.98rem;
+      }
+
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .nav-link {
+        font-size: 0.78rem;
+        padding: 6px 8px;
+      }
+
+      .lang-btn {
+        font-size: 0.76rem;
+        padding: 3px 6px;
+      }
+
+      .help-link,
+      .currency-btn,
+      .btn-booking {
+        display: none;
+      }
+
+      nav {
+        gap: 6px;
+      }
+    }
   `
 
   render() {
@@ -168,13 +241,13 @@ export class StHeader extends LitElement {
         <nav>
           <a class="nav-link" href="#about">${t('header.about')}</a>
           <a class="nav-link" href="#drivers">${t('header.drivers')}</a>
-          <a class="nav-link" href="#">${t('header.helpCentre')}</a>
+          <a class="nav-link help-link" href="#">${t('header.helpCentre')}</a>
           <div class="divider"></div>
           <div class="lang-buttons">
             <button class="lang-btn ${!isArabic ? 'active' : ''}" @click=${() => this.changeLanguage('en')}>EN</button>
             <button class="lang-btn ${isArabic ? 'active' : ''}" @click=${() => this.changeLanguage('ar')}>AR</button>
           </div>
-          <button class="nav-link">💶 EUR <span class="chevron">&#9662;</span></button>
+          <button class="nav-link currency-btn">💶 EUR <span class="chevron">&#9662;</span></button>
           <div class="divider"></div>
           <button class="btn-booking">${t('header.myBooking')}</button>
         </nav>

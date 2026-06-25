@@ -148,6 +148,35 @@ export class StDrivers extends LitElement {
     .cta-button:hover {
       background: #a68a1f;
     }
+
+    @media (max-width: 700px) {
+      .drivers-container {
+        padding: 36px 16px;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+        margin-bottom: 28px;
+      }
+
+      .drivers-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .driver-card {
+        padding: 20px;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
   `
 
   render() {

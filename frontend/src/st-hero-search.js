@@ -402,10 +402,85 @@ export class StHeroSearch extends LitElement {
     }
 
     @media (max-width: 700px) {
-      .search-box { flex-direction: column; }
-      .field { width: 100%; border-right: none; border-bottom: 1px solid #e0e0e8; height: 48px; }
-      .swap-btn { width: 100%; height: 44px; border-bottom: 1px solid #e0e0e8; border-radius: 0; }
-      .btn-search { width: 100%; height: 48px; border-radius: 0 0 5px 5px; }
+      .content {
+        padding: 28px 16px 24px;
+      }
+
+      h1 {
+        line-height: 1.2;
+      }
+
+      .subtitle {
+        margin-bottom: 18px;
+      }
+
+      .search-box {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        padding: 10px;
+        gap: 8px;
+        border: 2px solid #f7c72d;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.96);
+      }
+
+      .field {
+        flex: 1 1 100%;
+        border: 1px solid #d8e1ec;
+        border-radius: 10px;
+        background: #f8fbff;
+        min-height: 52px;
+        height: auto;
+        padding: 8px 10px;
+      }
+
+      .field input,
+      .field select {
+        font-size: 16px;
+      }
+
+      .date-field,
+      .return-field {
+        flex: 1 1 calc(50% - 4px);
+        white-space: normal;
+      }
+
+      .adults-field {
+        flex: 1 1 100%;
+      }
+
+      .return-field {
+        justify-content: flex-start;
+      }
+
+      .trip-toggle {
+        width: 100%;
+      }
+
+      .trip-btn {
+        flex: 1;
+        text-align: center;
+        font-size: 0.72rem;
+        padding: 5px 6px;
+      }
+
+      .swap-btn {
+        display: none;
+      }
+
+      .airport-dropdown,
+      .hotel-dropdown {
+        left: 0;
+        right: 0;
+        max-height: 220px;
+      }
+
+      .btn-search {
+        flex: 1 1 100%;
+        height: 52px;
+        border-radius: 10px;
+      }
     }
   `
 

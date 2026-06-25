@@ -81,6 +81,21 @@ export class StFeatures extends LitElement {
       height: 200px;
       object-fit: cover;
       display: block;
+      background: #e8eef5;
+    }
+
+    @media (max-width: 700px) {
+      section {
+        padding: 32px 16px;
+      }
+
+      img {
+        height: 160px;
+      }
+
+      .grid {
+        gap: 16px;
+      }
     }
 
     .body {

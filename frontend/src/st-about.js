@@ -112,6 +112,30 @@ export class StAbout extends LitElement {
     .cta-button:hover {
       background: #a68a1f;
     }
+
+    @media (max-width: 700px) {
+      .about-container {
+        padding: 36px 16px;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+        margin-bottom: 28px;
+      }
+
+      .about-grid {
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .about-card {
+        padding: 20px;
+      }
+    }
   `
 
   render() {

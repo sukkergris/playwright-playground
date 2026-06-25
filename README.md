@@ -65,6 +65,12 @@ Run one test:
 dotnet test --filter "FullyQualifiedName=PlaywrightTests.UnitTest1.Test1"
 ```
 
+## Recommended Browser Extension
+
+If you use Chrome for quick Playwright workflows, this extension is recommended:
+
+- Playwright CRX: https://chromewebstore.google.com/detail/playwright-crx/jambeljnbnfbkcpnoiaedcabbgmnnlcd
+
 Take a quick screenshot with Playwright CLI:
 
 ```sh
