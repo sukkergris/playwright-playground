@@ -43,6 +43,9 @@ public class HabibiSearchFormTest : PageTest
         Assert.Contains("Steigenberger ALDAU Beach Hotel", destinationValue);
         Assert.Equal("3", adultsValue);
 
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Flight arrival" }).ClickAsync();
+        await Page.GetByRole(AriaRole.Button, new() { Name = "19", Exact = true }).First.ClickAsync();
+
         var searchButton = Page.GetByRole(AriaRole.Button, new() { Name = "Search" });
         var requestTask = Page.WaitForRequestAsync(r => r.Method == "POST" && r.Url.Contains("/api/transfer-request"));
         await searchButton.ClickAsync();
@@ -57,7 +60,7 @@ public class HabibiSearchFormTest : PageTest
         var root = payload.RootElement;
         Assert.Equal("Cairo – CAI", root.GetProperty("arrival").GetString());
         Assert.Contains("Steigenberger ALDAU Beach Hotel", root.GetProperty("destination").GetString());
-        Assert.Equal("Jun 19 - 12:00", root.GetProperty("flightArrival").GetString());
+        Assert.Equal("Jun 19 · 12:00", root.GetProperty("flightArrival").GetString());
         Assert.False(root.GetProperty("roundTrip").GetBoolean());
         Assert.Equal(3, root.GetProperty("adults").GetInt32());
         Assert.Equal("en", root.GetProperty("language").GetString());
@@ -105,6 +108,9 @@ public class HabibiSearchFormTest : PageTest
         Assert.Contains("Steigenberger ALDAU Beach Hotel", destinationValue);
         Assert.Equal("4", adultsValue);
 
+        await Page.GetByRole(AriaRole.Button, new() { Name = "وصول الرحلة" }).ClickAsync();
+        await Page.GetByRole(AriaRole.Button, new() { Name = "19", Exact = true }).First.ClickAsync();
+
         var searchButton = Page.GetByRole(AriaRole.Button, new() { Name = "بحث" });
         var requestTask = Page.WaitForRequestAsync(r => r.Method == "POST" && r.Url.Contains("/api/transfer-request"));
         await searchButton.ClickAsync();
@@ -119,7 +125,7 @@ public class HabibiSearchFormTest : PageTest
         var root = payload.RootElement;
         Assert.Equal("Cairo – CAI", root.GetProperty("arrival").GetString());
         Assert.Contains("Steigenberger ALDAU Beach Hotel", root.GetProperty("destination").GetString());
-        Assert.Equal("Jun 19 - 12:00", root.GetProperty("flightArrival").GetString());
+        Assert.Equal("Jun 19 · 12:00", root.GetProperty("flightArrival").GetString());
         Assert.False(root.GetProperty("roundTrip").GetBoolean());
         Assert.Equal(4, root.GetProperty("adults").GetInt32());
         Assert.Equal("ar", root.GetProperty("language").GetString());

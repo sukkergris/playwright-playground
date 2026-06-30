@@ -9,6 +9,6 @@ public class MyTest : PageTest
     public async Task HomeLinkNavigates()
     {
         await Page.GotoAsync("http://localhost:5173/");
-        await Page.GetByRole(AriaRole.Link, new() { Name = "Home" }).ClickAsync();
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Habibi VIP Taxi" }).ClickAsync();
     }
 }
