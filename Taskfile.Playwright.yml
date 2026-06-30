@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+tasks:
+  test:
+    desc: "Kør Playwright tests headless (standard)"
+    dir: backend/src/PlaywrightTests
+    cmds:
+      - dotnet test {{.CLI_ARGS}}
+
+  start-display:
+    desc: "Start Xvfb + x11vnc + noVNC (virtuel skærm på :99, web på port 6080)"
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - .devcontainer/scripts/start-display.sh
+
+  up:
+    desc: "Start alt (spa-lit + noVNC) og kør headed tests. Åbn http://localhost:6081/vnc.html"
+    cmds:
+      - "{{.ROOT_DIR}}/.devcontainer/scripts/start-spa-bg.sh"
+      - task: test-headed
+        vars: { CLI_ARGS: "{{.CLI_ARGS}}" }
+
+  test-headed:
+    desc: "Kør Playwright tests i headed mode via noVNC (åbn http://localhost:6081/vnc.html)"
+    deps: [start-display]
+    dir: backend/src/PlaywrightTests
+    env:
+      DISPLAY: ":99"
+      HEADED: "1"
+    cmds:
+      - "{{.ROOT_DIR}}/.devcontainer/scripts/check-spa.sh"
+      - dotnet test {{.CLI_ARGS}}
