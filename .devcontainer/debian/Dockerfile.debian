@@ -16,4 +16,6 @@ ENV PATH="/home/container-user/.nvm/versions/node/v24.11.1/bin:${PATH}"
 
 RUN npm install -g @anthropic-ai/claude-code && \
     npm install -g @playwright/mcp@latest && \
-    npm install -g @playwright/cli@latest
+    npm install -g @playwright/cli@latest && \
+    npm install -g typescript@6.0.3
+
